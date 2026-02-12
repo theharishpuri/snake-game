@@ -68,17 +68,22 @@ function drawGame() {
   if (direction === "DOWN") headY += box;
 
   // game over conditions
-  if (
-    headX < 0 ||
-    headY < 0 ||
-    headX >= 400 ||
-    headY >= 400 ||
-    collision(headX, headY, snake)
-  ) {
-    clearInterval(game);
-    alert("Game Over! Score: " + score);
-    return;
-  }
+if (
+  headX < 0 ||
+  headY < 0 ||
+  headX >= 400 ||
+  headY >= 400 ||
+  collision(headX, headY, snake)
+) {
+  clearInterval(game);
+
+  message.innerText = "Game Over 😢\nScore: " + score;
+  startBtn.innerText = "Restart";
+  overlay.style.display = "flex";
+
+  return;
+}
+
 
   let newHead = { x: headX, y: headY };
 
