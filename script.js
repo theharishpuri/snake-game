@@ -173,3 +173,7 @@ canvas.addEventListener("touchend", e => {
     else if (dy < 0 && direction !== "DOWN") direction = "UP";
   }
 });
+// ================== SERVICE WORKER ==================
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
