@@ -8,18 +8,24 @@ let food;
 let direction;
 let score;
 let game;
+let speed = 120; // starting speed (smaller = faster)
+let level = 1;
 
 function startGame() {
   snake = [{ x: 9 * box, y: 9 * box }];
   direction = null;
   score = 0;
+  speed = 120;
+  level = 1;
+
   document.getElementById("score").innerText = score;
 
   food = randomFood();
 
   clearInterval(game);
-  game = setInterval(drawGame, 120);
+  game = setInterval(drawGame, speed);
 }
+
 
 function randomFood() {
   return {
@@ -75,10 +81,20 @@ function drawGame() {
 
   // eat food
   if (headX === food.x && headY === food.y) {
-    score++;
-    document.getElementById("score").innerText = score;
-    food = randomFood();
-  } else {
+  score++;
+  document.getElementById("score").innerText = score;
+  food = randomFood();
+
+  // increase speed every 5 points
+  if (score % 5 === 0) {
+    level++;
+    speed -= 10;
+
+    clearInterval(game);
+    game = setInterval(drawGame, speed);
+  }
+}
+ else {
     snake.pop();
   }
 
