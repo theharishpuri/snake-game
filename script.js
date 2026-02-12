@@ -13,6 +13,7 @@ const box = 20; // grid size
 
 let snake;
 let food;
+let lastTime = 0;
 let direction;
 let score;
 let game;
@@ -25,7 +26,8 @@ function startGame() {
  startBtn.addEventListener("click", () => {
   clickSound.play(); // 🔊 added
   overlay.style.display = "none";
-  startGame();
+  startGame();requestAnimationFrame(gameLoop);
+
 });
  snake = [{ x: 9 * box, y: 9 * box }];
   direction = null;
@@ -38,7 +40,7 @@ function startGame() {
   food = randomFood();
 
   clearInterval(game);
-  game = setInterval(drawGame, speed);
+  requestAnimationFrame(gameLoop);
 }
 
 
@@ -63,13 +65,31 @@ function drawGame() {
 
   // draw snake
   for (let i = 0; i < snake.length; i++) {
-    ctx.fillStyle = i === 0 ? "lime" : "green";
-    ctx.fillRect(snake[i].x, snake[i].y, box, box);
-  }
+    ctx.shadowBlur = 15;
+ctx.shadowColor = "#00ff66";
+
+ctx.fillStyle = i === 0 ? "#00ff99" : "#00cc66";
+ctx.fillRect(snake[i].x, snake[i].y, box - 2, box - 2);
+
+ctx.shadowBlur = 0;
+
 
   // draw food
-  ctx.fillStyle = "red";
-  ctx.fillRect(food.x, food.y, box, box);
+  let pulse = 6 + Math.sin(Date.now() / 120) * 4;
+
+ctx.shadowBlur = 20;
+ctx.shadowColor = "red";
+
+ctx.fillStyle = "red";
+ctx.fillRect(
+  food.x + box/2 - pulse/2,
+  food.y + box/2 - pulse/2,
+  pulse,
+  pulse
+);
+
+ctx.shadowBlur = 0;
+
 
   let headX = snake[0].x;
   let headY = snake[0].y;
@@ -118,7 +138,8 @@ if (score > highScore) {
     speed -= 10;
 
     clearInterval(game);
-    game = setInterval(drawGame, speed);
+  requestAnimationFrame(gameLoop);
+
   }
 }
 
@@ -131,6 +152,13 @@ if (score > highScore) {
 
 function collision(x, y, array) {
   return array.some(segment => segment.x === x && segment.y === y);
+}
+function gameLoop(timestamp) {
+  if (timestamp - lastTime > speed) {
+    drawGame();
+    lastTime = timestamp;
+  }
+  requestAnimationFrame(gameLoop);
 }
 
 // ==========================
