@@ -11,11 +11,18 @@
   <h1>Snake Game 🐍</h1>
   <p>Score: <span id="score">0</span></p>
 
-  <canvas id="game" width="400" height="400"></canvas>
+  <div class="game-wrapper">
+    <canvas id="game" width="400" height="400"></canvas>
 
-  <button onclick="startGame()">Start Game</button>
+    <!-- Overlay screen -->
+    <div id="overlay" class="overlay">
+      <h2 id="message">Press Start</h2>
+      <button id="startBtn">Start Game</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
 
