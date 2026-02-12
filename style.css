@@ -10,10 +10,14 @@ h1 {
 }
 
 canvas {
-  background: black;
-  border: 3px solid white;
+  background-color: #0a0a0a;
+  border: 3px solid #00ffcc;
   margin-top: 10px;
+
+  /* neon glow */
+  box-shadow: 0 0 20px #00ffcc;
 }
+
 
 button {
   margin-top: 10px;
