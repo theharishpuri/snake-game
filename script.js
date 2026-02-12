@@ -7,6 +7,7 @@ const message = document.getElementById("message");
 const startBtn = document.getElementById("startBtn");
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
+const highScoreEl = document.getElementById("highScore");
 
 const box = 20; // grid size
 
@@ -17,6 +18,8 @@ let score;
 let game;
 let speed = 120; // starting speed (smaller = faster)
 let level = 1;
+let highScore = localStorage.getItem("snakeHighScore") || 0;
+highScoreEl.innerText = highScore;
 
 function startGame() {
  startBtn.addEventListener("click", () => {
@@ -102,6 +105,11 @@ if (headX === food.x && headY === food.y) {
   score++;
   document.getElementById("score").innerText = score;
   food = randomFood();
+if (score > highScore) {
+  highScore = score;
+  highScoreEl.innerText = highScore;
+  localStorage.setItem("snakeHighScore", highScore);
+}
 
   eatSound.play(); // 🔊 added
 
