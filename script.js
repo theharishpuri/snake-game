@@ -1,3 +1,6 @@
+const overlay = document.getElementById("overlay");
+const message = document.getElementById("message");
+const startBtn = document.getElementById("startBtn");
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
