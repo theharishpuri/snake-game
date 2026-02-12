@@ -1,3 +1,7 @@
+// sounds
+const eatSound = new Audio("sounds/eat.mp3");
+const gameOverSound = new Audio("sounds/gameover.mp3");
+const clickSound = new Audio("sounds/click.mp3");
 const overlay = document.getElementById("overlay");
 const message = document.getElementById("message");
 const startBtn = document.getElementById("startBtn");
@@ -15,7 +19,12 @@ let speed = 120; // starting speed (smaller = faster)
 let level = 1;
 
 function startGame() {
-  snake = [{ x: 9 * box, y: 9 * box }];
+ startBtn.addEventListener("click", () => {
+  clickSound.play(); // 🔊 added
+  overlay.style.display = "none";
+  startGame();
+});
+ snake = [{ x: 9 * box, y: 9 * box }];
   direction = null;
   score = 0;
   speed = 120;
@@ -76,6 +85,7 @@ if (
   collision(headX, headY, snake)
 ) {
   clearInterval(game);
+gameOverSound.play();
 
   message.innerText = "Game Over 😢\nScore: " + score;
   startBtn.innerText = "Restart";
@@ -88,12 +98,13 @@ if (
   let newHead = { x: headX, y: headY };
 
   // eat food
-  if (headX === food.x && headY === food.y) {
+if (headX === food.x && headY === food.y) {
   score++;
   document.getElementById("score").innerText = score;
   food = randomFood();
 
-  // increase speed every 5 points
+  eatSound.play(); // 🔊 added
+
   if (score % 5 === 0) {
     level++;
     speed -= 10;
@@ -102,6 +113,7 @@ if (
     game = setInterval(drawGame, speed);
   }
 }
+
  else {
     snake.pop();
   }
