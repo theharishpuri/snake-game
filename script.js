@@ -180,4 +180,15 @@ function collision(x, y, array) {
 
 // ================== KEYBOARD ==================
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowLeft" && direction !=
+  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+  if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+  if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+  if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+});
+
+
+// ================== MOBILE BUTTONS ==================
+document.getElementById("up").onclick = () => setDirection("up");
+document.getElementById("down").onclick = () => setDirection("down");
+document.getElementById("left").onclick = () => setDirection("left");
+document.getElementById("right").onclick = () => setDirection("right");
