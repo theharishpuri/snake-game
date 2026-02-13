@@ -5,6 +5,11 @@ const overlay = document.getElementById("overlay");
 const message = document.getElementById("message");
 const startBtn = document.getElementById("startBtn");
 const highScoreEl = document.getElementById("highScore");
+const levelSelect = document.getElementById("levelSelect");
+
+levelSelect.addEventListener("change", () => {
+  speed = parseInt(levelSelect.value);
+});
 
 const box = 20;
 
