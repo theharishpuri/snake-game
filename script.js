@@ -88,6 +88,10 @@ function drawGame() {
     ctx.fillRect(snake[i].x, snake[i].y, box - 2, box - 2);
   }
   ctx.shadowBlur = 0;
+  
+ctx.fillStyle = "white";
+ctx.font = "14px Arial";
+ctx.fillText("By Harish", 10, canvas.height - 10);
 
   // animated food
   let pulse = 6 + Math.sin(Date.now() / 120) * 4;
