@@ -144,6 +144,20 @@ function drawGame() {
 function collision(x, y, array) {
   return array.some(seg => seg.x === x && seg.y === y);
 }
+function setDirection(dir) {
+  if (dir === 'up' && dy === 0) {
+    dx = 0; dy = -grid;
+  }
+  if (dir === 'down' && dy === 0) {
+    dx = 0; dy = grid;
+  }
+  if (dir === 'left' && dx === 0) {
+    dx = -grid; dy = 0;
+  }
+  if (dir === 'right' && dx === 0) {
+    dx = grid; dy = 0;
+  }
+}
 
 // ================== KEYBOARD ==================
 document.addEventListener("keydown", e => {
