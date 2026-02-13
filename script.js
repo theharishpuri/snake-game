@@ -49,6 +49,12 @@ function startGame() {
 
   requestAnimationFrame(gameLoop);
 }
+function setDirection(dir) {
+  if (dir === 'up' && dy === 0) { dx = 0; dy = -grid; }
+  if (dir === 'down' && dy === 0) { dx = 0; dy = grid; }
+  if (dir === 'left' && dx === 0) { dx = -grid; dy = 0; }
+  if (dir === 'right' && dx === 0) { dx = grid; dy = 0; }
+}
 
 // ================== FOOD ==================
 function randomFood() {
