@@ -31,6 +31,12 @@ button {
   position: relative;
   display: inline-block;
 }
+.credit {
+  font-size: 14px;
+  color: gray;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
 
 .overlay {
   position: absolute;
